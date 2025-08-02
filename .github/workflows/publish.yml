@@ -1,0 +1,30 @@
+name: Build & Publish ICS (3x daily)
+
+on:
+  schedule:
+    - cron: "0 12 * * *"  # 09:00 BRT
+    - cron: "0 16 * * *"  # 13:00 BRT
+    - cron: "0 20 * * *"  # 17:00 BRT
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agent_crf_ics_v0_2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python agent.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: agent_crf_ics_v0_2/out
+      - uses: actions/deploy-pages@v4
