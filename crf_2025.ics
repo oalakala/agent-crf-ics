@@ -1,0 +1,60 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Agent CRF 2025//ICS 1.0//PT-BR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-TIMEZONE:America/Sao_Paulo
+X-WR-CALNAME:Flamengo 2025 (Oficiais)
+X-WR-CALDESC:Atualizado automaticamente.
+BEGIN:VEVENT
+UID:033b2cb450ddcea9b3c588b7b16ed233@agent-crf-ics
+SUMMARY:🏆 Flamengo x Atlético-MG — Oitavas (Ida)
+DTSTART;TZID=America/Sao_Paulo:20250731T213000
+DTEND;TZID=America/Sao_Paulo:20250731T233000
+LOCATION:Maracanã, Rio de Janeiro - RJ
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT30M
+DESCRIPTION:Lembrete do jogo
+END:VALARM
+DESCRIPTION:Onde assistir: SporTV; Premiere
+Oficial: https://www.cbf.com.br/futebol-brasileiro/tabelas/copa-do-brasil/masculino/2025?doc=Tabela+Detalhada
+Oitavas (ida).
+Fonte: CBF/Oficiais — Atualizações semanais.
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:22554aaddb43dc7f7350e54e13a09767@agent-crf-ics
+SUMMARY:🏆 Atlético-MG x Flamengo — Oitavas (Volta)
+DTSTART;TZID=America/Sao_Paulo:20250806T190000
+DTEND;TZID=America/Sao_Paulo:20250806T210000
+LOCATION:Arena MRV, Belo Horizonte - MG
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT30M
+DESCRIPTION:Lembrete do jogo
+END:VALARM
+DESCRIPTION:Onde assistir: Premiere; SporTV
+Oficial: https://www.cbf.com.br/futebol-brasileiro/jogos/copa-do-brasil/masculino/2025/atletico-mineiro-saf-x-flamengo/831547
+Oitavas (volta).
+Fonte: CBF/Oficiais — Atualizações semanais.
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d1ee9713cf6ed76f24890bf7a37a3261@agent-crf-ics
+SUMMARY:🇧🇷 Ceará x Flamengo — Série A (Rodada 18)
+DTSTART;TZID=America/Sao_Paulo:20250803T183000
+DTEND;TZID=America/Sao_Paulo:20250803T203000
+LOCATION:Arena Castelão, Fortaleza - CE
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT30M
+DESCRIPTION:Lembrete do jogo
+END:VALARM
+DESCRIPTION:Onde assistir: Record; CazéTV; Premiere
+Oficial: https://www.cbf.com.br/futebol-brasileiro/tabelas/campeonato-brasileiro/serie-a/2025?doc=Tabela+Detalhada
+Fase Única | Rodada 18 | Jogo 179.
+Fonte: CBF/Oficiais — Atualizações semanais.
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

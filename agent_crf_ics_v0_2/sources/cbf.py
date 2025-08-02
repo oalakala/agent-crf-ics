@@ -1,0 +1,6 @@
+from datetime import datetime
+def fetch_matches_2025_stub():
+    ida={'competition':'Copa do Brasil','match_id':'CDB-2025-94-ida','summary':'🏆 Flamengo x Atlético-MG — Oitavas (Ida)','start':datetime(2025,7,31,21,30),'duration_min':120,'location':'Maracanã, Rio de Janeiro - RJ','onde_assistir':'SporTV; Premiere','cbf_url':'https://www.cbf.com.br/futebol-brasileiro/tabelas/copa-do-brasil/masculino/2025?doc=Tabela+Detalhada','notes':'Oitavas (ida).'}
+    volta={'competition':'Copa do Brasil','match_id':'CDB-2025-106-volta','summary':'🏆 Atlético-MG x Flamengo — Oitavas (Volta)','start':datetime(2025,8,6,19,0),'duration_min':120,'location':'Arena MRV, Belo Horizonte - MG','onde_assistir':'Premiere; SporTV','cbf_url':'https://www.cbf.com.br/futebol-brasileiro/jogos/copa-do-brasil/masculino/2025/atletico-mineiro-saf-x-flamengo/831547','notes':'Oitavas (volta).'}
+    bra={'competition':'Brasileirão','match_id':'BRA-2025-rod18-cea-fla','summary':'🇧🇷 Ceará x Flamengo — Série A (Rodada 18)','start':datetime(2025,8,3,18,30),'duration_min':120,'location':'Arena Castelão, Fortaleza - CE','onde_assistir':'Record; CazéTV; Premiere','cbf_url':'https://www.cbf.com.br/futebol-brasileiro/tabelas/campeonato-brasileiro/serie-a/2025?doc=Tabela+Detalhada','notes':'Fase Única | Rodada 18 | Jogo 179.'}
+    return [ida,volta,bra]
