@@ -1,0 +1,32 @@
+timezone: America/Sao_Paulo
+default_alarm_minutes: 30
+
+bundles:
+  futebol:
+    filters:
+      modalidade: [futebol]
+    output: calendars/futebol/futebol.ics
+
+  basquete:
+    filters:
+      modalidade: [basquete]
+    output: calendars/basquete/basquete.ics
+
+  eua:
+    filters:
+      competicoes_incluidas: [NFL]
+    output: calendars/eua/eua.ics
+
+  fight:
+    filters:
+      modalidade: [lutas]
+    output: calendars/fight/fight.ics
+
+  motor:
+    filters:
+      modalidade: [motores]
+    output: calendars/motor/motor.ics
+
+  master:
+    filters: {}
+    output: calendars/master/all.ics
