@@ -1,0 +1,7 @@
+pyyaml
+python-dateutil
+pytz
+requests
+beautifulsoup4
+lxml
+pdfplumber
