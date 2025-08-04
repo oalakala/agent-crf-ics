@@ -5,7 +5,7 @@ on:
     - cron: '0 12 * * *'  # 09:00 BRT
     - cron: '0 16 * * *'  # 13:00 BRT
     - cron: '0 20 * * *'  # 17:00 BRT
-  workflow_dispatch: {}    # permite rodar manualmente
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -15,9 +15,6 @@ permissions:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: agent_crf_ics_v0_2
     steps:
       - uses: actions/checkout@v4
 
@@ -25,19 +22,31 @@ jobs:
         with:
           python-version: '3.11'
 
-      # instala dependências (inclui pyyaml)
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
           pip install pyyaml python-dateutil pytz requests beautifulsoup4 lxml pdfplumber
 
-      - name: Build calendars & CSVs
-        run: python agent.py
+      - name: Build (run agent.py)
+        run: |
+          set -e
+          if [ -f agent_crf_ics_v0_2/agent.py ]; then (cd agent_crf_ics_v0_2 && python agent.py); \
+          elif [ -f agent.py ]; then python agent.py; \
+          else echo "::error::agent.py não encontrado"; exit 1; fi
 
-      - name: Upload artifact (out/)
+      - name: Collect site files
+        run: |
+          rm -rf site_out
+          mkdir -p site_out
+          if [ -d agent_crf_ics_v0_2/out ]; then cp -R agent_crf_ics_v0_2/out/* site_out/ || true; fi
+          if [ -d out ]; then cp -R out/* site_out/ || true; fi
+          echo "Publicando estes arquivos:"
+          find site_out -maxdepth 3 -type f | sed 's/^/ - /' || true
+
+      - name: Upload artifact (Pages)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: agent_crf_ics_v0_2/out
+          path: site_out
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
