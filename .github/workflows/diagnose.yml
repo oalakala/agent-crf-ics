@@ -1,0 +1,46 @@
+name: Diagnose Agent Build
+on:
+  workflow_dispatch: {}
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show repo tree
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 3 -type f -name 'agent.py' -print
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          python -V
+          python -m pip install --upgrade pip
+          pip install pyyaml python-dateutil pytz requests beautifulsoup4 lxml pdfplumber
+
+      - name: Run agent
+        run: |
+          # entra na pasta do projeto, se existir
+          if [ -f agent_crf_ics_v0_2/agent.py ]; then cd agent_crf_ics_v0_2; fi
+          python agent.py || (echo "::error::agent.py falhou"; exit 1)
+
+      - name: List outputs
+        run: |
+          if [ -d agent_crf_ics_v0_2/out ]; then ls -la agent_crf_ics_v0_2/out; fi
+          if [ -d out ]; then ls -la out; fi
+
+      - name: Upload out artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: out
+          path: |
+            agent_crf_ics_v0_2/out
+            out
+          if-no-files-found: warn
