@@ -1,0 +1,51 @@
+name: Build & Publish ICS
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3,11,19 * * *'  # 03:00, 11:00 e 19:00 UTC
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Collect site files
+        run: |
+          rm -rf site
+          mkdir -p site/ics site/wp
+          # Saídas do agent (se existirem)
+          if [ -d "agent_crf_ics_v0_2/out/ics" ]; then cp -r agent_crf_ics_v0_2/out/ics/* site/ics/ || true; fi
+          if [ -d "agent_crf_ics_v0_2/out/wp" ]; then cp -r agent_crf_ics_v0_2/out/wp/* site/wp/ || true; fi
+          # Conteúdo versionado no repo (manual)
+          if [ -d "ics" ]; then cp -r ics/* site/ics/ || true; fi
+          if [ -d "wp" ]; then cp -r wp/* site/wp/ || true; fi
+          # índice simples
+          echo "<!doctype html><meta charset='utf-8'><h1>agent-crf-ics</h1><ul><li><a href='ics/'>ICS</a></li><li><a href='wp/'>WP</a></li></ul>" > site/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
